@@ -1,0 +1,60 @@
+In this package, we are learning "S.O.L.I.D." design principles
+
+'''
+    S --> Single Responsibility Principle   [SRP]
+          Every code unit should have only one resposnibility.
+
+    O --> Open Closed Princile              [OCP]
+          A code base should be open for modification but closed for extension.
+
+    L --> Liskov's Substitution Principle   [LSP]
+    I --> Interface Segregation Princile    [ISP]
+    D --> Dependency Inversion Principle    [DIP]
+'''
+***********************************************************
+Problem statement --> Design a bird
+''' Bird
+    Attributes
+        id
+        name
+        age
+        weight
+        type
+
+    Behaviours
+        eat();
+        walk();
+        fly();
+'''
+***********************************************************************************
+Version0 -->
+    Create a bird class with all the attributes and behaviour
+
+    Cons :
+    - Understandibility
+    - Testing
+    - Regression [new code might break what was working]
+    - Merge conflict
+    - Code duplication
+    - Violates S of SOLID
+        - Bird class is responsible for every type of birds.
+        - Bird class is also responsible for all type of attribute and behaviour
+
+    New requirement : Some birds can fly but some cannot
+
+    - Violates O of SOLID
+        if we add a new bird which cannot fly, we need to modify our code base
+
+*************************************************************************************
+Version1 -->
+    For new requirement : Some birds can fly but some cannot
+
+    Implement fly() seperately for each class [fly() --> abstract]
+    To do that we need to make bird class abstract
+
+    S --> Compliant : Bird class is responsible for generic type
+                      Sparrow/Crow/Penguin is responsible for specific type
+    O --> Compliant : To add a new bird, we just need to create a new bird class (Ex : Eagle class)
+
+
+    New requirement : Now we have some birds that cannot fly. How to handle that ?
